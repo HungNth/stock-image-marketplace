@@ -16,8 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::latest()->get();
-        return view('admin.categories.index')
-            ->with(['categories' => $categories]);
+        return view('admin.categories.index', ['categories' => $categories]);
+        // ->with(['categories' => $categories]);
     }
     
     /**
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.index');
+        return view('admin.categories.create');
     }
     
     /**
@@ -40,7 +40,7 @@ class CategoryController extends Controller
             ]);
             
             return redirect()->route('admin.categories.index')
-                ->with(['success', 'Category added successfully.']);
+                ->with('success', 'Category added successfully.');
         }
     }
     
@@ -57,8 +57,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit')
-            ->with(['category' => $category]);
+        return view('admin.categories.edit', ['category' => $category]);
     }
     
     /**
@@ -69,11 +68,10 @@ class CategoryController extends Controller
         if ($request->validated()) {
             $category->update([
                 'name' => $request->name,
-            
             ]);
             
             return redirect()->route('admin.categories.index')
-                ->with(['success', 'Category updated successfully.']);
+                ->with('success', 'Category updated successfully.');
         }
     }
     
@@ -84,6 +82,6 @@ class CategoryController extends Controller
     {
         $category->delete();
         return redirect()->route('admin.categories.index')
-            ->with(['success', 'Category deleted successfully.']);
+            ->with('success', 'Category deleted successfully.');
     }
 }
