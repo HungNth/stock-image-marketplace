@@ -73,7 +73,7 @@ class PictureController extends Controller
      */
     public function uploadFile(Request $request)
     {
-        // get logged in user
+        // get logged-in user
         $user = User::find($request->user_id);
         // save file
         $file = $request->file('file');
