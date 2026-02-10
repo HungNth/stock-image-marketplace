@@ -19,6 +19,10 @@
     <title>React & Laravel File Marketplace - @yield('title')</title>
 </head>
 <body class="bg-light">
+@if(auth()->guard('admin')->check())
+    @include('admin.layouts.header')
+@endif
+@include('admin.layouts.alert')
 @yield('content')
 <!-- Jquery JS -->
 <script
