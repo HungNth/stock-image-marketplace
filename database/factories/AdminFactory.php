@@ -22,7 +22,7 @@ class AdminFactory extends Factory
             'name' => 'admin',
             'email' => 'thienhungdev@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('admin'),
+            'password' => Hash::make('admin123456'),
             'remember_token' => Str::random(10),
         ];
     }
