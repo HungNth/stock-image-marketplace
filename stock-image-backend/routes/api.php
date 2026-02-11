@@ -28,11 +28,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('user/register', [UserController::class, 'store']);
 Route::post('user/login', [UserController::class, 'auth']);
-Route::get('category/{hasPictures}', [CategoryController::class, 'index']);
+Route::get('categories/{hasPictures}', [CategoryController::class, 'index']);
 Route::get('pictures', [PictureController::class, 'index']);
 Route::get('pictures/{picture}', [PictureController::class, 'fetchById']);
 Route::get('pictures/category/{category}', [PictureController::class, 'fetchByCategory']);
 Route::get('pictures/extensions/{ext}', [PictureController::class, 'fetchByExt']);
 Route::post('find/pictures', [PictureController::class, 'fetchByTerm']);
 Route::get('extensions', [PictureController::class, 'fetchExtension']);
-
