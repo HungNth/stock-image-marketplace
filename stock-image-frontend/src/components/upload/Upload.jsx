@@ -124,6 +124,7 @@ export default function Upload() {
                                         require={!picture.file}
                                         maxSize={5}
                                         onSizeError={handleSizeError}
+                                        classes="drop_area"
                                     />
                                     {
                                         fileSizeError && <div className="text-white my-2 rounded p-2 bg-danger">
