@@ -59,7 +59,7 @@ export default function Upload() {
             if (e?.response?.status === 422) {
                 setErrors(e.response.data.errors);
             }
-            //console.log(e);
+            console.log(e);
         }
     };
     
@@ -160,7 +160,6 @@ export default function Upload() {
                     </div>
                 </div>
             </div>
-        
         </div>
     );
 }
