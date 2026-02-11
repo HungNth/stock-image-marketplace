@@ -20,27 +20,27 @@ class PictureController extends Controller
     {
         return PictureResource::collection(Picture::whereStatus(1)->latest()->get());
     }
-    
+
     /**
      * Fetch a picture by ID.
      */
     public function fetchById(Picture $picture)
     {
-        if ( ! $picture->status) {
+        if (!$picture->status) {
             abort(404);
         }
         return PictureResource::make($picture);
     }
-    
+
     /**
      * Fetch pictures by category.
      */
     public function fetchByCategory(Category $category)
     {
-        
+
         return PictureResource::collection($category->pictures);
     }
-    
+
     /**
      * Fetch pictures by ext.
      */
@@ -49,7 +49,7 @@ class PictureController extends Controller
         $pictures = Picture::where('ext', $ext)->latest()->get();
         return PictureResource::collection($pictures);
     }
-    
+
     /**
      * Fetch pictures by title.
      */
@@ -59,7 +59,7 @@ class PictureController extends Controller
         $pictures = Picture::where('title', 'like', '%'.$searchTerm.'%')->latest()->get();
         return PictureResource::collection($pictures);
     }
-    
+
     /**
      * Fetch all the extensions.
      */
@@ -68,7 +68,7 @@ class PictureController extends Controller
         $extension = Picture::select('ext')->distinct()->get();
         return response()->json($extension);
     }
-    
+
     /**
      * Upload files.
      */
@@ -83,7 +83,7 @@ class PictureController extends Controller
         Picture::create([
             'title' => $request->title,
             'price' => $request->price,
-            'user_id' => $request->user_id,
+            'user_id' => $user->id,
             'category_id' => $request->category_id,
             'file_path' => 'storage/user/images/'.$file_name,
             'ext' => $file->getClientOriginalExtension(),
@@ -94,7 +94,7 @@ class PictureController extends Controller
             'user' => UserResource::make($user),
         ]);
     }
-    
+
     /**
      * Save the picture in storage.
      */
@@ -102,10 +102,10 @@ class PictureController extends Controller
     {
         $file_name = time().'_'.'picture'.'_'.$file->getClientOriginalName();
         $file->storeAs('user/images', $file_name, 'public');
-        
+
         return $file_name;
     }
-    
+
     /**
      * Download the picture from storage.
      */
