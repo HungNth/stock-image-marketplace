@@ -11,10 +11,12 @@ import {
     REGISTER,
 } from 'redux-persist';
 import userReducer from '../slices/userSlice.js';
+import cartReducer from '../slices/cartSlice.js';
 
 // combining lal the reducers
 const rootReducer = combineReducers({
-    user: userReducer
+    user: userReducer,
+    cart: cartReducer
 });
 
 // config the persist
