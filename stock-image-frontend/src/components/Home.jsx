@@ -18,6 +18,7 @@ export default function Home() {
     useEffect(() => {
         setLoading(true);
         const fetchPictures = async() => {
+            setPicturesToShow(6);
             try {
                 if (categoryId) {
                     const response = await axios.get(`${BASE_URL}/pictures/category/${categoryId}`);
@@ -55,7 +56,7 @@ export default function Home() {
         if (picturesToShow > pictures.length) {
             return;
         } else {
-            setPicturesToShow(prevPicturesToShow => prevPicturesToShow += 2);
+            setPicturesToShow(prevPicturesToShow => prevPicturesToShow += 6);
         }
     };
     
