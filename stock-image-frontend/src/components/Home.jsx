@@ -5,6 +5,7 @@ import Spinner from './layouts/Spinner.jsx';
 import useCategories from './custom/useCategories.js';
 import Categories from './partials/Categories.jsx';
 import Extensions from './partials/Extensions.jsx';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
     const [pictures, setPictures] = useState([]);
@@ -72,12 +73,14 @@ export default function Home() {
                                 {
                                     pictures?.slice(0, picturesToShow).map((picture) => (
                                         <div key={picture.id} className="col-md-6 mb-2">
-                                            <div className="card">
-                                                <img src={picture.image_path} alt={picture.title}
-                                                     className="card-img-top"
-                                                     height="300"
-                                                />
-                                            </div>
+                                            <Link to={`/picture/${picture.id}`}>
+                                                <div className="card">
+                                                    <img src={picture.image_path} alt={picture.title}
+                                                         className="card-img-top"
+                                                         height="300"
+                                                    />
+                                                </div>
+                                            </Link>
                                         </div>
                                     ))
                                 }
