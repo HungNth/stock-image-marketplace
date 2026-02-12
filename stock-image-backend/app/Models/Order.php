@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -17,5 +18,10 @@ class Order extends Model
     public function picture(): BelongsTo
     {
         return $this->belongsTo(Picture::class);
+    }
+    
+    public function getCreatedAtAttribute($value): string
+    {
+        return Carbon::parse($value)->diffForHumans();
     }
 }
