@@ -4,6 +4,7 @@ import Register from './components/user/Register';
 import Login from './components/user/Login';
 import Header from './components/layouts/Header.jsx';
 import Upload from './components/upload/Upload.jsx';
+import Profile from './components/user/Profile.jsx';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/upload" element={<Upload />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </BrowserRouter>
     );
