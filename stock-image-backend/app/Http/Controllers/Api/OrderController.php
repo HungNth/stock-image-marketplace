@@ -37,7 +37,7 @@ class OrderController extends Controller
     /** Pay order via stripe */
     public function payByStripe(Request $request)
     {
-        Stripe::setApiKey('sk_test_xxxxx');
+        Stripe::setApiKey('');
         try {
             // Create a PaymentIntent with amount and currency
             $paymentIntent = \Stripe\PaymentIntent::create([
