@@ -20,7 +20,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('user/logout', [UserController::class, 'logout']);
     Route::post('store/picture', [PictureController::class, 'uploadFile']);
     Route::post('store/order', [OrderController::class, 'store']);
-    Route::post('download/picture', [PictureController::class, 'downloadPicture']);
+    Route::post('pay/order', [OrderController::class, 'payByStripe']);
+    Route::get('download/picture/{picture}', [PictureController::class, 'downloadPicture']);
     Route::post('store/review', [ReviewController::class, 'store']);
     Route::put('update/review', [ReviewController::class, 'updateReview']);
     Route::post('delete/review', [ReviewController::class, 'deleteReview']);
