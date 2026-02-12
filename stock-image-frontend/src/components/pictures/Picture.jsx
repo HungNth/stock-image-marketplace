@@ -32,7 +32,55 @@ export default function Picture() {
         fetchPictureById();
     }, [id]);
     
-    console.log(picture);
+    const downloadPicture = async(e) => {
+        try {
+            const response = await axios.get(`${BASE_URL}/download/picture/${picture?.id}`, {
+                headers: {
+                    'Content-Type': `image/${picture?.ext}`,
+                    'Authorization': `Bearer ${token}`
+                },
+                responseType: 'blob'
+            });
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `${picture?.title}.${picture?.ext}`);
+            document.body.appendChild(link);
+            link.click();
+            // clean the dom
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    
+    const checkIfUserBoughtPicture = () => {
+        const exists = user?.orders.some(order => order.picture.id === picture?.id);
+        
+        if (exists) {
+            return (
+                <button className="btn btn-primary"
+                        onClick={() => downloadPicture()}
+                >
+                    <i className="bi bi-download"></i>{' '}Download
+                </button>
+            );
+        } else {
+            return (
+                <button className="btn btn-primary"
+                        onClick={() => dispatch(addToCart({
+                            id: picture?.id,
+                            image_path: picture?.image_path,
+                            title: picture?.title,
+                            price: picture?.price,
+                        }))}
+                >
+                    <i className="bi bi-bag-plus"></i>{' '}Add to cart
+                </button>
+            );
+        }
+    };
     
     return (
         <div className="container">
@@ -100,16 +148,9 @@ export default function Picture() {
                                     </div>
                                     <div className="card-body">
                                         <div className="d-flex justify-content-center my-2">
-                                            <button className="btn btn-primary"
-                                                    onClick={() => dispatch(addToCart({
-                                                        id: picture?.id,
-                                                        image_path: picture?.image_path,
-                                                        title: picture?.title,
-                                                        price: picture?.price,
-                                                    }))}
-                                            >
-                                                <i className="bi bi-bag-plus"></i>{' '}Add to cart
-                                            </button>
+                                            {
+                                                checkIfUserBoughtPicture()
+                                            }
                                         </div>
                                     </div>
                                 </div>
