@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Profile() {
     const { user, isLoggedIn } = useSelector(state => state.user);
@@ -156,7 +156,14 @@ export default function Profile() {
                                                     <td>{order.picture.title}</td>
                                                     <td>${order.total}</td>
                                                     <td>{order.created_at}</td>
-                                                    <td></td>
+                                                    <td>
+                                                        <Link
+                                                            to={`/picture/${order.picture.id}`}
+                                                            className="btn btn-primary btn-sm"
+                                                        >
+                                                            <i className="bi bi-download"></i>
+                                                        </Link>
+                                                    </td>
                                                 
                                                 </tr>
                                             ))
