@@ -7,7 +7,7 @@ import { BASE_URL, getConfig } from '../../helpers/config';
 import { useSelector } from 'react-redux';
 
 export default function Stripe() {
-    const stripePromise = loadStripe('pk_test_xxx');
+    const stripePromise = loadStripe('');
     const [clientSecret, setClientSecret] = useState('');
     const { token } = useSelector(state => state.user);
     const { cartItems } = useSelector(state => state.cart);
