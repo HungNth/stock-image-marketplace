@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 
 export default function Header() {
     const { isLoggedIn, user, token } = useSelector(state => state.user);
+    const { cartItems } = useSelector(state => state.cart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
@@ -75,6 +76,15 @@ export default function Header() {
                             >
                                 <i className="bi bi-upload"></i>{' '}
                                 Upload
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`}
+                                to="/cart"
+                            >
+                                <i className="bi bi-cart"></i>{' '}
+                                ({cartItems.length})
                             </Link>
                         </li>
                         {
