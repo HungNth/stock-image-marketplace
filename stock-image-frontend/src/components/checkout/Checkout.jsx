@@ -5,12 +5,12 @@ import Stripe from './Stripe.jsx';
 
 export default function Checkout() {
     const { isLoggedIn } = useSelector(state => state.user);
-    const naviate = useNavigate();
+    const navigate = useNavigate();
     
     useEffect(() => {
-        if (!isLoggedIn) naviate('/login');
+        if (!isLoggedIn) navigate('/login');
         
-    }, [isLoggedIn, naviate]);
+    }, [isLoggedIn, navigate]);
     
     return (
         <div className="container">
