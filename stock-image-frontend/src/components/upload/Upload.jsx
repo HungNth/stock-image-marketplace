@@ -1,19 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useCategories from '../custom/useCategories.js';
 import { useNavigate } from 'react-router-dom';
 import { FileUploader } from 'react-drag-drop-files';
 import Spinner from '../layouts/Spinner.jsx';
 import axios from 'axios';
-import { BASE_URL } from '../../helpers/config.js';
+import { BASE_URL, getConfig } from '../../helpers/config.js';
 import { toast } from 'react-toastify';
 import useValidation from '../custom/useValidation.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentUser } from '../../redux/slices/userSlice.js';
 
 export default function Upload() {
+    const { user, isLoggedIn, token } = useSelector(state => state.user);
     const [picture, setPicture] = useState({
         title: '',
         price: '',
         category_id: '',
-        user_id: 1,
+        user_id: user?.id,
         file: null,
     });
     const categories = useCategories(0);
@@ -22,6 +25,11 @@ export default function Upload() {
     const navigate = useNavigate();
     const fileTypes = ['JPG', 'PNG', 'JPEG'];
     const [fileSizeError, setFileSizeError] = useState('');
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        if (!isLoggedIn) navigate('/login');
+    }, [isLoggedIn, navigate]);
     
     const handleChange = (file) => {
         setFileSizeError('');
@@ -48,8 +56,12 @@ export default function Upload() {
         formData.append('user_id', picture.user_id);
         
         try {
-            const response = await axios.post(`${BASE_URL}/store/picture`, formData);
+            const response = await axios.post(`${BASE_URL}/store/picture`,
+                formData,
+                getConfig(token, 'multipart/form-data')
+            );
             setLoading(false);
+            dispatch(setCurrentUser(response.data.user));
             toast.success(response.data.message, {
                 position: 'top-right',
             });
