@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PictureController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AdminController::class, 'login'])->name('admin.login');
@@ -21,20 +22,24 @@ Route::prefix('admin')->group(function () {
             'store' => 'admin.categories.store',
             'edit' => 'admin.categories.edit',
             'update' => 'admin.categories.update',
-
             'destroy' => 'admin.categories.destroy',
         ],
     ]);
-
+    // reviews
     Route::get('reviews', [ReviewController::class, 'index'])
         ->name('admin.reviews.index');
     Route::get('edit/{review}/{status}/reviews', [ReviewController::class, 'toggleReviewsStatus'])
         ->name('admin.reviews.edit');
     Route::delete('delete/{review}/reviews', [ReviewController::class, 'destroy'])
         ->name('admin.reviews.destroy');
-
+    // users
     Route::get('pictures', [PictureController::class, 'index'])
         ->name('admin.pictures.index');
     Route::get('edit/{picture}/{status}/pictures', [PictureController::class, 'togglePictureStatus'])
         ->name('admin.pictures.edit');
+    // users
+    Route::get('users', [UserController::class, 'index'])
+        ->name('admin.users.index');
+    Route::delete('delete/{user}/users', [UserController::class, 'destroy'])
+        ->name('admin.users.destroy');
 });

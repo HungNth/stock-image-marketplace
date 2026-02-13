@@ -29,6 +29,13 @@
                     Pictures
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.users.index')) active @endif" aria-current="page"
+                   href="{{ route('admin.users.index') }}">
+                    <i class="fas fa-users"></i>
+                    Users
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
