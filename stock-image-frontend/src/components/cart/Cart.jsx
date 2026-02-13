@@ -39,7 +39,7 @@ export default function Cart() {
                                                         <td>{index + 1}</td>
                                                         <td>
                                                             <img
-                                                                src={item.image_path}
+                                                                src={item.image}
                                                                 alt={item.title}
                                                                 className="img-fluid rounded"
                                                                 height={60}
