@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\User;
 use ErrorException;
 use Illuminate\Http\Request;
+use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
 class OrderController extends Controller
@@ -24,14 +25,14 @@ class OrderController extends Controller
             $data['user_id'] = $user->id;
             $data['picture_id'] = $picture['id'];
             $data['total'] = $this->calculateOrderTotal($request->pictures, $savingForDatabase = true);
-
-            // save the data
-            $order = Order::create($data);
-            // return the response
-            return response()->json([
-                'user' => UserResource::make($user),
-            ]);
         }
+
+        // save the data
+        Order::create($data);
+        // return the response
+        return response()->json([
+            'user' => UserResource::make($request->user()),
+        ]);
     }
 
     /** Pay order via stripe */
@@ -41,7 +42,7 @@ class OrderController extends Controller
         Stripe::setApiKey($stripe_secret_key);
         try {
             // Create a PaymentIntent with amount and currency
-            $paymentIntent = \Stripe\PaymentIntent::create([
+            $paymentIntent = PaymentIntent::create([
                 'amount' => $this->calculateOrderTotal($request->cartItems, $savingForDatabase = false),
                 'currency' => 'usd',
                 'description' => 'React Stock Images',
