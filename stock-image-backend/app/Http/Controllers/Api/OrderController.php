@@ -37,7 +37,8 @@ class OrderController extends Controller
     /** Pay order via stripe */
     public function payByStripe(Request $request)
     {
-        Stripe::setApiKey('');
+        $stripe_secret_key = config('stripe.stripe_secret_key');
+        Stripe::setApiKey($stripe_secret_key);
         try {
             // Create a PaymentIntent with amount and currency
             $paymentIntent = \Stripe\PaymentIntent::create([
