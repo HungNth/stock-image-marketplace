@@ -3,14 +3,16 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
 import axios from 'axios';
-import { BASE_URL, getConfig } from '../../helpers/config';
+import { BASE_URL, getConfig, STRIPE_PUBLIC_KEY } from '../../helpers/config';
 import { useSelector } from 'react-redux';
 
 export default function Stripe() {
-    const stripePromise = loadStripe('');
+    const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
     const [clientSecret, setClientSecret] = useState('');
     const { token } = useSelector(state => state.user);
     const { cartItems } = useSelector(state => state.cart);
+    
+    console.log(stripePromise);
     
     useEffect(() => {
         fetchClientSecret();
