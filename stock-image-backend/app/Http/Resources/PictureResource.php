@@ -24,7 +24,8 @@ class PictureResource extends JsonResource
             'ext' => $this->ext,
             'status' => $this->status,
             'orders' => $this->orders()->latest()->get(),
-            'reviews' => $this->reviews()->with('user')->where('approved')->latest()->get(),
+            'reviews' => $this->reviews()->with('user')
+                ->where('approved', 1)->latest()->get(),
         ];
     }
 }
