@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart } from '../../redux/slices/cartSlice.js';
 import { Link } from 'react-router-dom';
+import useTitle from '../custom/useTitle.js';
 
 export default function Cart() {
     const { cartItems } = useSelector(state => state.cart);
     const dispatch = useDispatch();
+    
+    useTitle('Cart');
     
     return (
         <div className="container">

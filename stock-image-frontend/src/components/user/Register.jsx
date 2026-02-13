@@ -6,6 +6,7 @@ import Spinner from '../layouts/Spinner.jsx';
 import { BASE_URL } from '../../helpers/config.js';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import useTitle from '../custom/useTitle.js';
 
 export default function Register() {
     const [user, setUser] = useState({
@@ -17,6 +18,8 @@ export default function Register() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { isLoggedIn } = useSelector(state => state.user);
+    
+    useTitle('Register');
     
     useEffect(() => {
         if (isLoggedIn) navigate('/');

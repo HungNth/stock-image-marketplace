@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import useValidation from '../custom/useValidation.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentUser } from '../../redux/slices/userSlice.js';
+import useTitle from '../custom/useTitle.js';
 
 export default function Upload() {
     const { user, isLoggedIn, token } = useSelector(state => state.user);
@@ -26,6 +27,8 @@ export default function Upload() {
     const fileTypes = ['JPG', 'PNG', 'JPEG'];
     const [fileSizeError, setFileSizeError] = useState('');
     const dispatch = useDispatch();
+    
+    useTitle('Upload Pictures');
     
     useEffect(() => {
         if (!isLoggedIn) navigate('/login');

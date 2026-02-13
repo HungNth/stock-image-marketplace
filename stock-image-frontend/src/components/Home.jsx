@@ -6,6 +6,7 @@ import useCategories from './custom/useCategories.js';
 import Categories from './partials/Categories.jsx';
 import Extensions from './partials/Extensions.jsx';
 import { Link } from 'react-router-dom';
+import useTitle from './custom/useTitle.js';
 
 export default function Home() {
     const [pictures, setPictures] = useState([]);
@@ -15,6 +16,8 @@ export default function Home() {
     const [categoryId, setCategoryId] = useState('');
     const [pictureExt, setPictureExt] = useState('');
     const [picturesToShow, setPicturesToShow] = useState(6);
+    
+    useTitle('Home');
     
     useEffect(() => {
         setLoading(true);

@@ -1,11 +1,10 @@
-import { useEffect } from "react";
-
+import { useEffect } from 'react';
 
 export default function useTitle(title) {
     
     useEffect(() => {
-        document.title = `React & Laravel Files Marketplace Stock Images - ${title}`
-    }, [title])
-
-    return null
+        document.title = `Stock Image Marketplace - ${title}`;
+    }, [title]);
+    
+    return null;
 }

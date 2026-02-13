@@ -5,6 +5,7 @@ import axios from 'axios';
 import { BASE_URL, getConfig } from '../../helpers/config.js';
 import { setCurrentUser, setLoggedInOut, setToken } from '../../redux/slices/userSlice.js';
 import { toast } from 'react-toastify';
+import SearchBox from '../search/SearchBox.jsx';
 
 export default function Header() {
     const { isLoggedIn, user, token } = useSelector(state => state.user);
@@ -50,87 +51,97 @@ export default function Header() {
     };
     
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
-            <div className="container-fluid">
-                <Link className="navbar-brand" to="/">React Stock Images</Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link
-                                className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
-                                aria-current="page" to="/"
-                            >
-                                <i className="bi bi-house"></i>{' '}
-                                Home
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link
-                                className={`nav-link ${location.pathname === '/upload' ? 'active' : ''}`}
-                                to="/upload"
-                            >
-                                <i className="bi bi-upload"></i>{' '}
-                                Upload
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link
-                                className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`}
-                                to="/cart"
-                            >
-                                <i className="bi bi-cart"></i>{' '}
-                                ({cartItems.length})
-                            </Link>
-                        </li>
-                        {
-                            isLoggedIn ? (
-                                <>
-                                    <li className="nav-item">
-                                        <Link
-                                            className={`nav-link ${location.pathname === '/profile' ? 'active' : ''}`}
-                                            to="/profile"
-                                        >
-                                            <i className="bi bi-person"></i>{' '}
-                                            {user?.name}
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <button className="nav-link border-0 bg-light" onClick={() => logoutUser()}>
-                                            <i className="bi bi-person-fill-down"></i>{' '}
-                                            Logout
-                                        </button>
-                                    </li>
-                                </>
-                            ) : (
-                                <>
-                                    <li className="nav-item">
-                                        <Link
-                                            className={`nav-link ${location.pathname === '/register' ? 'active' : ''}`}
-                                            to="/register"
-                                        >
-                                            <i className="bi bi-person-add"></i>{' '}
-                                            Register
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link
-                                            className={`nav-link ${location.pathname === '/login' ? 'active' : ''}`}
-                                            to="/login">
-                                            <i className="bi bi-person-fill-up"></i>{' '}
-                                            Login
-                                        </Link>
-                                    </li>
-                                </>
-                            )
-                        }
-                    </ul>
+        <>
+            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+                <div className="container-fluid">
+                    <Link className="navbar-brand" to="/">React Stock Images</Link>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                                <Link
+                                    className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+                                    aria-current="page" to="/"
+                                >
+                                    <i className="bi bi-house"></i>{' '}
+                                    Home
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link
+                                    className={`nav-link ${location.pathname === '/upload' ? 'active' : ''}`}
+                                    to="/upload"
+                                >
+                                    <i className="bi bi-upload"></i>{' '}
+                                    Upload
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link
+                                    className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`}
+                                    to="/cart"
+                                >
+                                    <i className="bi bi-cart"></i>{' '}
+                                    ({cartItems.length})
+                                </Link>
+                            </li>
+                            {
+                                isLoggedIn ? (
+                                    <>
+                                        <li className="nav-item">
+                                            <Link
+                                                className={`nav-link ${location.pathname === '/profile' ? 'active' : ''}`}
+                                                to="/profile"
+                                            >
+                                                <i className="bi bi-person"></i>{' '}
+                                                {user?.name}
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <button className="nav-link border-0 bg-light" onClick={() => logoutUser()}>
+                                                <i className="bi bi-person-fill-down"></i>{' '}
+                                                Logout
+                                            </button>
+                                        </li>
+                                    </>
+                                ) : (
+                                    <>
+                                        <li className="nav-item">
+                                            <Link
+                                                className={`nav-link ${location.pathname === '/register' ? 'active' : ''}`}
+                                                to="/register"
+                                            >
+                                                <i className="bi bi-person-add"></i>{' '}
+                                                Register
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link
+                                                className={`nav-link ${location.pathname === '/login' ? 'active' : ''}`}
+                                                to="/login">
+                                                <i className="bi bi-person-fill-up"></i>{' '}
+                                                Login
+                                            </Link>
+                                        </li>
+                                    </>
+                                )
+                            }
+                        </ul>
+                        <ul className="navbar-nav ml-auto mb-2 mg-lg-0">
+                            <li className="nav-item">
+                                <Link className="nav-link" data-bs-toggle="offcanvas" to="#offcanvasExample"
+                                      role="button" aria-controls="offcanvasExample">
+                                    <i className="bi bi-search"></i>
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+            <SearchBox /></>
     );
 }

@@ -7,6 +7,7 @@ import { BASE_URL } from '../../helpers/config.js';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { setCurrentUser, setLoggedInOut, setToken } from '../../redux/slices/userSlice.js';
+import useTitle from '../custom/useTitle.js';
 
 export default function Login() {
     const [user, setUser] = useState({
@@ -18,6 +19,8 @@ export default function Login() {
     const navigate = useNavigate();
     const { isLoggedIn } = useSelector(state => state.user);
     const dispatch = useDispatch();
+    
+    useTitle('Login');
     
     useEffect(() => {
         if (isLoggedIn) navigate('/');

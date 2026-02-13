@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import useTitle from '../custom/useTitle.js';
 
 export default function Profile() {
     const { user, isLoggedIn } = useSelector(state => state.user);
@@ -8,6 +9,8 @@ export default function Profile() {
     
     const [picturesToShow, setPicturesToShow] = useState(6);
     const [ordersToShow, setOrdersToShow] = useState(6);
+    
+    useTitle('Profile');
     
     useEffect(() => {
         if (!isLoggedIn) navigate('/login');

@@ -37,8 +37,6 @@ export default function Picture() {
         fetchPictureById();
     }, [id]);
     
-    console.log(picture);
-    
     const calculateReviewAverage = () => {
         let average = picture?.reviews.reduce((acc, review) => {
             return acc + review.rating / picture.reviews.length;
