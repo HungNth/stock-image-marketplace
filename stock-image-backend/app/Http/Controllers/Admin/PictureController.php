@@ -20,7 +20,7 @@ class PictureController extends Controller
     }
 
     /**
-     * Approve and disapprove pictures.
+     * Change status of picture.
      */
     public function togglePictureStatus(Picture $picture, $status)
     {
