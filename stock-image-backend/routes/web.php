@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PictureController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\UserController;
@@ -42,4 +43,9 @@ Route::prefix('admin')->group(function () {
         ->name('admin.users.index');
     Route::delete('delete/{user}/users', [UserController::class, 'destroy'])
         ->name('admin.users.destroy');
+    // orders
+    Route::get('orders', [OrderController::class, 'index'])
+        ->name('admin.orders.index');
+    Route::delete('delete/{order}/orders', [OrderController::class, 'destroy'])
+        ->name('admin.orders.destroy');
 });

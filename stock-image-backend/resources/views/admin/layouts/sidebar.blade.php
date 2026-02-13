@@ -36,6 +36,13 @@
                     Users
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.orders.index')) active @endif" aria-current="page"
+                   href="{{ route('admin.orders.index') }}">
+                    <i class="fas fa-cart-shopping"></i>
+                    Orders
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
