@@ -8,6 +8,7 @@ import Profile from './components/user/Profile.jsx';
 import Picture from './components/pictures/Picture.jsx';
 import Cart from './components/cart/Cart.jsx';
 import Checkout from './components/checkout/Checkout.jsx';
+import PageNotFound from './components/404/PageNotFound.jsx';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="*" element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>
     );
