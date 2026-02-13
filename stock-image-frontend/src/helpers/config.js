@@ -10,3 +10,6 @@ export const getConfig = (token, contentType) => {
     
     return config;
 };
+
+// get stripe public key from environment variables
+export const STRIPE_PUBLIC_KEY = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
