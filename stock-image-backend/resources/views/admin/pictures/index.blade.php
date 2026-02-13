@@ -25,6 +25,7 @@
                                         <th>Title</th>
                                         <th>Preview</th>
                                         <th>Status</th>
+                                        <th>Category</th>
                                         <th>Added</th>
                                         <th></th>
                                     </tr>
@@ -44,9 +45,10 @@
                                                 @if ($picture->status)
                                                     <span class="badge bg-success">Live</span>
                                                 @else
-                                                    <span class="badge bg-danger">Block</span>
+                                                    <span class="badge bg-danger">Blocked</span>
                                                 @endif
                                             </td>
+                                            <td>{{ $picture->category->name }}</td>
                                             <td>{{ $picture->created_at }}</td>
                                             <td>
                                                 @if ($picture->status)
