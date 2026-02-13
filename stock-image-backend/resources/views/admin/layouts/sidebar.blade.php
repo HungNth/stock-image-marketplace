@@ -22,6 +22,13 @@
                     Reviews
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.pictures.index')) active @endif" aria-current="page"
+                   href="{{ route('admin.pictures.index') }}">
+                    <i class="fas fa-image"></i>
+                    Pictures
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

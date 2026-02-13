@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PictureController;
 use App\Http\Controllers\Admin\ReviewController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,9 @@ Route::prefix('admin')->group(function () {
         ->name('admin.reviews.edit');
     Route::delete('delete/{review}/reviews', [ReviewController::class, 'destroy'])
         ->name('admin.reviews.destroy');
+
+    Route::get('pictures', [PictureController::class, 'index'])
+        ->name('admin.pictures.index');
+    Route::get('edit/{picture}/{status}/pictures', [PictureController::class, 'togglePictureStatus'])
+        ->name('admin.pictures.edit');
 });
