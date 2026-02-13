@@ -15,6 +15,13 @@
                     Categories
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.reviews.index')) active @endif" aria-current="page"
+                   href="{{ route('admin.reviews.index') }}">
+                    <i class="fas fa-star"></i>
+                    Reviews
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
