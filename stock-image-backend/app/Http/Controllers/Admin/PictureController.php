@@ -20,7 +20,7 @@ class PictureController extends Controller
     }
 
     /**
-     * Change status of picture.
+     * Change the status of the picture.
      */
     public function togglePictureStatus(Picture $picture, $status)
     {
