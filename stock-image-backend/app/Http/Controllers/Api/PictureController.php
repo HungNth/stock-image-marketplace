@@ -37,8 +37,8 @@ class PictureController extends Controller
      */
     public function fetchByCategory(Category $category)
     {
-
-        return PictureResource::collection($category->pictures);
+        $pictures = $category->pictures()->where('status', 1)->latest()->get();
+        return PictureResource::collection($pictures);
     }
 
     /**
@@ -46,7 +46,7 @@ class PictureController extends Controller
      */
     public function fetchByExt($ext)
     {
-        $pictures = Picture::where('ext', $ext)->latest()->get();
+        $pictures = Picture::where('ext', $ext)->where('status', 1)->latest()->get();
         return PictureResource::collection($pictures);
     }
 
